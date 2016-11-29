@@ -55,10 +55,23 @@ class PlaySoundsViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setupAudio()
+        
+        // Scale buttons when screen orientation is set to Landscape mode
+        scaleButton(slowButton)
+        scaleButton(fastButton)
+        scaleButton(lowPitchButton)
+        scaleButton(highPitchButton)
+        scaleButton(echoButton)
+        scaleButton(reverbButton)
+        scaleButton(stopButton)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureUI(.notPlaying)
+    }
+    
+    private func scaleButton(_ button: UIButton) {
+        button.imageView?.contentMode = UIViewContentMode.scaleAspectFit
     }
 }
