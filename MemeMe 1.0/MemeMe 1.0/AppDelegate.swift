@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  MemeMe 1.0
 //
-//  Created by xiongmingjing on 28/11/2016.
+//  Created by xiongmingjing on 01/12/2016.
 //  Copyright © 2016 xiongmingjing. All rights reserved.
 //
 
