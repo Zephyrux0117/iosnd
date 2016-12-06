@@ -28,6 +28,8 @@
 	<string>Main</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSCameraUsageDescription</key>
+	<string>Test</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Impact.ttf</string>
