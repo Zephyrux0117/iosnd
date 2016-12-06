@@ -18,6 +18,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var shareToolbar: UIToolbar!
     @IBOutlet weak var shareButton: UIBarButtonItem!
     
+    var userIsInMiddleOfTypingTop = false
+    var userIsInMiddleOfTypingBottom = false
+    
     var memes = [Meme]()
     
     let memeTextAttributes:[String:Any] = [
@@ -36,8 +39,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         switch textField.tag {
         case 0:
             textField.text = "TOP"
+            userIsInMiddleOfTypingTop = false
         case 1:
             textField.text = "BOTTOM"
+            userIsInMiddleOfTypingBottom = false
         default:
             break
         }
@@ -73,9 +78,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
         imagePicker.delegate = self
         present(imagePicker, animated: true, completion: nil)
-        
-        configTextField(topTextField)
-        configTextField(bottomTextField)
     }
     
     @IBAction func shareImage(_ sender: UIBarButtonItem) {
@@ -121,7 +123,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     // TextField delegate
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.text = ""
+        
+        switch textField.tag {
+        case 0:
+            if !userIsInMiddleOfTypingTop {
+                textField.text = ""
+                userIsInMiddleOfTypingTop = true
+            }
+        case 1:
+            if !userIsInMiddleOfTypingBottom {
+                textField.text = ""
+                userIsInMiddleOfTypingBottom = true
+            }
+        default:
+            break
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -140,6 +156,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         picker.dismiss(animated: true, completion: nil)
         if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage {
             imagePickerView.image = image
+            
+            configTextField(topTextField)
+            configTextField(bottomTextField)
         }
     }
     
